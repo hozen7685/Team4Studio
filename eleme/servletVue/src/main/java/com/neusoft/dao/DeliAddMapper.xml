@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.dao.DeliAddMapper">
+  <resultMap id="BaseResultMap" type="com.neusoft.po.DeliAdd">
+    <id column="daId" jdbcType="INTEGER" property="daid" />
+    <result column="conName" jdbcType="VARCHAR" property="conname" />
+    <result column="conSex" jdbcType="INTEGER" property="consex" />
+    <result column="conTel" jdbcType="VARCHAR" property="contel" />
+    <result column="add" jdbcType="VARCHAR" property="add" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    daId, conName, conSex, conTel, add, uid
+  </sql>
+  <select id="selectByExample" parameterType="com.neusoft.po.DeliAddExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deliAdd
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deliAdd
+    where daId = #{daid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from deliAdd
+    where daId = #{daid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neusoft.po.DeliAddExample">
+    delete from deliAdd
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neusoft.po.DeliAdd">
+    insert into deliAdd (daId, conName, conSex, 
+      conTel, add, uid)
+    values (#{daid,jdbcType=INTEGER}, #{conname,jdbcType=VARCHAR}, #{consex,jdbcType=INTEGER}, 
+      #{contel,jdbcType=VARCHAR}, #{add,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neusoft.po.DeliAdd">
+    insert into deliAdd
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="daid != null">
+        daId,
+      </if>
+      <if test="conname != null">
+        conName,
+      </if>
+      <if test="consex != null">
+        conSex,
+      </if>
+      <if test="contel != null">
+        conTel,
+      </if>
+      <if test="add != null">
+        add,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="daid != null">
+        #{daid,jdbcType=INTEGER},
+      </if>
+      <if test="conname != null">
+        #{conname,jdbcType=VARCHAR},
+      </if>
+      <if test="consex != null">
+        #{consex,jdbcType=INTEGER},
+      </if>
+      <if test="contel != null">
+        #{contel,jdbcType=VARCHAR},
+      </if>
+      <if test="add != null">
+        #{add,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neusoft.po.DeliAddExample" resultType="java.lang.Long">
+    select count(*) from deliAdd
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update deliAdd
+    <set>
+      <if test="row.daid != null">
+        daId = #{row.daid,jdbcType=INTEGER},
+      </if>
+      <if test="row.conname != null">
+        conName = #{row.conname,jdbcType=VARCHAR},
+      </if>
+      <if test="row.consex != null">
+        conSex = #{row.consex,jdbcType=INTEGER},
+      </if>
+      <if test="row.contel != null">
+        conTel = #{row.contel,jdbcType=VARCHAR},
+      </if>
+      <if test="row.add != null">
+        add = #{row.add,jdbcType=VARCHAR},
+      </if>
+      <if test="row.uid != null">
+        uid = #{row.uid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update deliAdd
+    set daId = #{row.daid,jdbcType=INTEGER},
+      conName = #{row.conname,jdbcType=VARCHAR},
+      conSex = #{row.consex,jdbcType=INTEGER},
+      conTel = #{row.contel,jdbcType=VARCHAR},
+      add = #{row.add,jdbcType=VARCHAR},
+      uid = #{row.uid,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.po.DeliAdd">
+    update deliAdd
+    <set>
+      <if test="conname != null">
+        conName = #{conname,jdbcType=VARCHAR},
+      </if>
+      <if test="consex != null">
+        conSex = #{consex,jdbcType=INTEGER},
+      </if>
+      <if test="contel != null">
+        conTel = #{contel,jdbcType=VARCHAR},
+      </if>
+      <if test="add != null">
+        add = #{add,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where daId = #{daid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neusoft.po.DeliAdd">
+    update deliAdd
+    set conName = #{conname,jdbcType=VARCHAR},
+      conSex = #{consex,jdbcType=INTEGER},
+      conTel = #{contel,jdbcType=VARCHAR},
+      add = #{add,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=VARCHAR}
+    where daId = #{daid,jdbcType=INTEGER}
+  </update>
+</mapper>
