@@ -18,6 +18,8 @@ public class Food {
 
     private String foodimg;
 
+    private Cart fCart;
+
     public Integer getFoodid() {
         return foodid;
     }
@@ -74,16 +76,25 @@ public class Food {
         this.foodimg = foodimg;
     }
 
+    public Cart getfCart() {
+        return fCart;
+    }
+
+    public void setfCart(Cart fCart) {
+        this.fCart = fCart;
+    }
+
     public Food() {
     }
 
-    public Food(String foodname, String foodexplain, BigDecimal foodprice, Integer bid, String remarks, String foodimg) {
+    public Food(String foodname, String foodexplain, BigDecimal foodprice, Integer bid, String remarks, String foodimg, Cart fCart) {
         this.foodname = foodname;
         this.foodexplain = foodexplain;
         this.foodprice = foodprice;
         this.bid = bid;
         this.remarks = remarks;
         this.foodimg = foodimg;
+        this.fCart = fCart;
     }
 
     @Override
@@ -96,6 +107,7 @@ public class Food {
                 ", bid=" + bid +
                 ", remarks='" + remarks + '\'' +
                 ", foodimg='" + foodimg + '\'' +
+                ", fCart=" + fCart +
                 '}';
     }
 

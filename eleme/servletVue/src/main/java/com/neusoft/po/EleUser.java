@@ -1,6 +1,7 @@
 package com.neusoft.po;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class EleUser {
@@ -17,6 +18,12 @@ public class EleUser {
     private Date uptime;
 
     private String userimg;
+
+    private List<DeliAdd> deliAdds;
+
+    private Cart uCart;
+
+    private List<Orders> uOrders;
 
     public String getUid() {
         return uid;
@@ -74,16 +81,49 @@ public class EleUser {
         this.userimg = userimg;
     }
 
+    public List<DeliAdd> getDeliAdds() {
+        return deliAdds;
+    }
+
+    public void setDeliAdds(List<DeliAdd> deliAdds) {
+        this.deliAdds = deliAdds;
+    }
+
+    public Cart getuCart() {
+        return uCart;
+    }
+
+    public void setuCart(Cart uCart) {
+        this.uCart = uCart;
+    }
+
+    public List<Orders> getuOrders() {
+        return uOrders;
+    }
+
+    public void setuOrders(List<Orders> uOrders) {
+        this.uOrders = uOrders;
+    }
+
     public EleUser() {
     }
 
-    public EleUser(String psw, String username, Integer sex, String uphone, Date uptime, String userimg) {
+    public EleUser(String uid, String psw, String username, Integer sex, String uphone, String userimg, List<DeliAdd> deliAdds, Cart uCart, List<Orders> uOrders) {
+        this.uid = uid;
         this.psw = psw;
         this.username = username;
         this.sex = sex;
         this.uphone = uphone;
-        this.uptime = uptime;
         this.userimg = userimg;
+        this.deliAdds = deliAdds;
+        this.uCart = uCart;
+        this.uOrders = uOrders;
+    }
+
+    //注册新用户使用
+    public EleUser(String psw, String uphone) {
+        this.psw = psw;
+        this.uphone = uphone;
     }
 
     @Override
@@ -96,6 +136,9 @@ public class EleUser {
                 ", uphone='" + uphone + '\'' +
                 ", uptime=" + uptime +
                 ", userimg='" + userimg + '\'' +
+                ", deliAdds=" + deliAdds +
+                ", uCart=" + uCart +
+                ", uOrders=" + uOrders +
                 '}';
     }
 

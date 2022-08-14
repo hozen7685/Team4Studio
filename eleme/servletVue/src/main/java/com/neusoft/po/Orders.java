@@ -1,6 +1,7 @@
 package com.neusoft.po;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 public class Orders {
@@ -17,6 +18,10 @@ public class Orders {
     private Integer daid;
 
     private Integer ostate;
+
+    private DeliAdd oDeliAdd;
+
+    private List<Cart> oCart;
 
     public Integer getOid() {
         return oid;
@@ -74,16 +79,33 @@ public class Orders {
         this.ostate = ostate;
     }
 
-    public Orders() {
+    public DeliAdd getoDeliAdd() {
+        return oDeliAdd;
     }
 
-    public Orders(String uid, Integer bid, String odate, BigDecimal ott, Integer daid, Integer ostate) {
+    public void setoDeliAdd(DeliAdd oDeliAdd) {
+        this.oDeliAdd = oDeliAdd;
+    }
+
+    public List<Cart> getoCart() {
+        return oCart;
+    }
+
+    public void setoCart(List<Cart> oCart) {
+        this.oCart = oCart;
+    }
+
+    public Orders(String uid, Integer bid, String odate, BigDecimal ott, Integer daid, Integer ostate, DeliAdd oDeliAdd) {
         this.uid = uid;
         this.bid = bid;
         this.odate = odate;
         this.ott = ott;
         this.daid = daid;
         this.ostate = ostate;
+        this.oDeliAdd = oDeliAdd;
+    }
+
+    public Orders() {
     }
 
     @Override
@@ -96,6 +118,8 @@ public class Orders {
                 ", ott=" + ott +
                 ", daid=" + daid +
                 ", ostate=" + ostate +
+                ", oDeliAdd=" + oDeliAdd +
+                ", oCart=" + oCart +
                 '}';
     }
 

@@ -1,5 +1,6 @@
 package com.neusoft.po;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Cart {
@@ -13,6 +14,9 @@ public class Cart {
 
     private Integer quantity;
 
+    private Business cBusiness;
+
+    private Food cFood;
     public Integer getCartid() {
         return cartid;
     }
@@ -53,13 +57,38 @@ public class Cart {
         this.quantity = quantity;
     }
 
+    public Business getcBusiness() {
+        return cBusiness;
+    }
+
+    public void setcBusiness(Business cBusiness) {
+        this.cBusiness = cBusiness;
+    }
+
+    public Food getcFood() {
+        return cFood;
+    }
+
+    public void setcFood(Food cFood) {
+        this.cFood = cFood;
+    }
+
     public Cart() {
     }
 
-    public Cart(Integer foodid, Integer bid, String uid, Integer quantity) {
+    public Cart(Integer foodid, Integer bid, String uid, Integer quantity, Business cBusiness, Food cFood) {
         this.foodid = foodid;
         this.bid = bid;
         this.uid = uid;
+        this.quantity = quantity;
+        this.cBusiness = cBusiness;
+        this.cFood = cFood;
+    }
+
+    public Cart(Integer cartid, Integer foodid, Integer bid, Integer quantity) {
+        this.cartid = cartid;
+        this.foodid = foodid;
+        this.bid = bid;
         this.quantity = quantity;
     }
 
@@ -71,6 +100,8 @@ public class Cart {
                 ", bid=" + bid +
                 ", uid='" + uid + '\'' +
                 ", quantity=" + quantity +
+                ", cBusiness=" + cBusiness +
+                ", cFood=" + cFood +
                 '}';
     }
 

@@ -33,4 +33,8 @@ public interface EleUserMapper {
     int updateByPrimaryKeyWithBLOBs(EleUser row);
 
     int updateByPrimaryKey(EleUser row);
+    //--------------------------自定义---------------------------------------------
+    List<EleUser> selectAllUser();
+
+    EleUser selectWithDeliAddByuid(String uid);
 }

@@ -223,4 +223,19 @@
       uid = #{uid,jdbcType=VARCHAR}
     where daId = #{daid,jdbcType=INTEGER}
   </update>
+
+<!--  根据uid查找所有用户地址-->
+  <select id="selectByuid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select daId,conName,conSex,conTel,`add`
+    from deliAdd
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+
+<!--  根据daId查找地址-->
+  <select id="selectBydaId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+      conName,conSex,conTel,`add`
+    from deliAdd
+    where daId = #{daid,jdbcType=INTEGER}
+  </select>
 </mapper>

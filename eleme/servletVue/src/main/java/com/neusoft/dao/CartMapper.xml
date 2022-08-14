@@ -200,12 +200,58 @@
     </set>
     where cartId = #{cartid,jdbcType=INTEGER}
   </update>
+<!--  <update id="updateByPrimaryKey" parameterType="com.neusoft.po.Cart">-->
+<!--    update cart-->
+<!--    set foodId = #{foodid,jdbcType=INTEGER},-->
+<!--      bid = #{bid,jdbcType=INTEGER},-->
+<!--      uid = #{uid,jdbcType=VARCHAR},-->
+<!--      quantity = #{quantity,jdbcType=INTEGER}-->
+<!--    where cartId = #{cartid,jdbcType=INTEGER}-->
+<!--  </update>-->
+
+<!--  *****************************-->
+  <resultMap id="BaseResultMapWithBusinessAndFood" type="com.neusoft.po.Cart">
+    <id column="cartId" jdbcType="INTEGER" property="cartid" />
+    <result column="foodId" jdbcType="INTEGER" property="foodid" />
+    <result column="bid" jdbcType="INTEGER" property="bid" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <association property="cBusiness" javaType="com.neusoft.po.Business"
+                 select="com.neusoft.dao.BusinessMapper.selectByPrimaryKeyForCart" column="bid" />
+    <association property="cFood" javaType="com.neusoft.po.Food"
+                 select="com.neusoft.dao.FoodMapper.selectByPrimaryKey" column="foodId" />
+  </resultMap>
+
+  <select id="selectCartsBYuid" parameterType="java.lang.String" resultMap="BaseResultMapWithBusinessAndFood">
+    select *
+    from cart
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectCartsBYbid" parameterType="java.lang.Integer" resultMap="BaseResultMapWithBusinessAndFood">
+    select *
+    from cart
+    where bid = #{bid,jdbcType=INTEGER}
+  </select>
+
   <update id="updateByPrimaryKey" parameterType="com.neusoft.po.Cart">
     update cart
     set foodId = #{foodid,jdbcType=INTEGER},
-      bid = #{bid,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=VARCHAR},
-      quantity = #{quantity,jdbcType=INTEGER}
+        bid = #{bid,jdbcType=INTEGER},
+        quantity = #{quantity,jdbcType=INTEGER}
     where cartId = #{cartid,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCountByFoodId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select quantity
+    from cart
+    where foodId = #{foodid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectCartsBYbidAnduid" resultMap="BaseResultMapWithBusinessAndFood">
+    select *
+    from cart
+    where uid = #{arg0} and bid = #{arg1}
+  </select>
+
 </mapper>

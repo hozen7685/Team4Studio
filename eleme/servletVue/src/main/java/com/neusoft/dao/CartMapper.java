@@ -27,4 +27,13 @@ public interface CartMapper {
     int updateByPrimaryKeySelective(Cart row);
 
     int updateByPrimaryKey(Cart row);
+
+    //-----------------------------------------
+    List<Cart> selectCartsBYuid(String uid);
+
+    List<Cart> selectCartsBYbid(String bid);
+
+    Cart selectCountByFoodId(Integer foodid);
+
+    List<Cart> selectCartsBYbidAnduid(String uid,Integer bid);
 }

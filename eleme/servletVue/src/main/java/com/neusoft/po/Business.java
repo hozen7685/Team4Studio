@@ -1,6 +1,7 @@
 package com.neusoft.po;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 public class Business {
@@ -21,6 +22,8 @@ public class Business {
     private String remarks;
 
     private String bimg;
+
+    private List<Food> bFoods;
 
     public Integer getBid() {
         return bid;
@@ -94,10 +97,18 @@ public class Business {
         this.bimg = bimg;
     }
 
+    public List<Food> getbFoods() {
+        return bFoods;
+    }
+
+    public void setbFoods(List<Food> bFoods) {
+        this.bFoods = bFoods;
+    }
+
     public Business() {
     }
 
-    public Business(String bname, String badd, String binfo, Integer ordertypeid, BigDecimal startprice, BigDecimal deliprice, String remarks, String bimg) {
+    public Business(String bname, String badd, String binfo, Integer ordertypeid, BigDecimal startprice, BigDecimal deliprice, String remarks, String bimg, List<Food> bFoods) {
         this.bname = bname;
         this.badd = badd;
         this.binfo = binfo;
@@ -106,6 +117,7 @@ public class Business {
         this.deliprice = deliprice;
         this.remarks = remarks;
         this.bimg = bimg;
+        this.bFoods = bFoods;
     }
 
     @Override
@@ -120,8 +132,10 @@ public class Business {
                 ", deliprice=" + deliprice +
                 ", remarks='" + remarks + '\'' +
                 ", bimg='" + bimg + '\'' +
+                ", bFoods=" + bFoods +
                 '}';
     }
+
 
     @Override
     public boolean equals(Object o) {

@@ -33,4 +33,13 @@ public interface BusinessMapper {
     int updateByPrimaryKeyWithBLOBs(Business row);
 
     int updateByPrimaryKey(Business row);
+
+    //***********************
+    List<Business> selectAllBusinesses();
+
+    Business selectBYbidWithFoods(Integer bid);
+
+    Business selectByPrimaryKeyForCart(Integer bid);
+
+//    List<Business> selectBYbidWithFoods();
 }

@@ -108,7 +108,8 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">-->
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithFoodAndBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
@@ -320,4 +321,39 @@
       remarks = #{remarks,jdbcType=VARCHAR}
     where bid = #{bid,jdbcType=INTEGER}
   </update>
+
+<!--  *****************************************-->
+  <resultMap id="BaseResultMapWithFoods" type="com.neusoft.po.Business">
+    <id column="bid" jdbcType="INTEGER" property="bid" />
+    <result column="bName" jdbcType="VARCHAR" property="bname" />
+    <result column="bAdd" jdbcType="VARCHAR" property="badd" />
+    <result column="bInfo" jdbcType="VARCHAR" property="binfo" />
+    <result column="orderTypeId" jdbcType="INTEGER" property="ordertypeid" />
+    <result column="startPrice" jdbcType="DECIMAL" property="startprice" />
+    <result column="deliPrice" jdbcType="DECIMAL" property="deliprice" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <collection property="bFoods" javaType="java.util.List" ofType="com.neusoft.po.Food"
+                select="com.neusoft.dao.FoodMapper.selectBYbid"
+                column="bid">
+    </collection>
+  </resultMap>
+
+  <resultMap extends="BaseResultMapWithFoods" id="ResultMapWithFoodAndBLOBs" type="com.neusoft.po.Business">
+    <result column="bImg" jdbcType="LONGVARCHAR" property="bimg" />
+  </resultMap>
+
+  <select id="selectAllBusinesses" resultType="com.neusoft.po.Business" resultMap="ResultMapWithBLOBs">
+    select * from business
+  </select>
+
+  <select id="selectBYbidWithFoods" resultType="com.neusoft.po.Business" parameterType="java.lang.Integer" resultMap="ResultMapWithFoodAndBLOBs">
+    select * from business where bid = #{bid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKeyForCart" parameterType="java.lang.Integer" resultMap="ResultMapWithFoodAndBLOBs">
+    select bName,bInfo,startPrice,deliPrice,bImg
+    from business
+    where bid = #{bid,jdbcType=INTEGER}
+  </select>
+
 </mapper>

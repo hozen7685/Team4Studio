@@ -284,4 +284,33 @@
       uptime = #{uptime,jdbcType=TIMESTAMP}
     where uid = #{uid,jdbcType=VARCHAR}
   </update>
+
+  <!--*********************************************************************-->
+  <resultMap id="UserWithDeliResultMap" type="com.neusoft.po.EleUser">
+    <id column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="uPhone" jdbcType="VARCHAR" property="uphone" />
+    <collection property="deliAdds" javaType="java.util.List" ofType="com.neusoft.po.DeliAdd"
+                select="com.neusoft.dao.DeliAddMapper.selectByuid" column="uid"/>
+  </resultMap>
+
+  <select id="selectAllUser" resultType="com.neusoft.po.EleUser" resultMap="ResultMapWithBLOBs">
+    SELECT * from eleuser
+  </select>
+
+  <select id="selectWithDeliAddByuid" resultType="com.neusoft.po.EleUser" resultMap="UserWithDeliResultMap">
+    SELECT * from eleuser where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>
+

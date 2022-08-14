@@ -33,4 +33,7 @@ public interface FoodMapper {
     int updateByPrimaryKeyWithBLOBs(Food row);
 
     int updateByPrimaryKey(Food row);
+
+    //*********************************8
+    List<Food> selectBYbid(Integer bid);
 }

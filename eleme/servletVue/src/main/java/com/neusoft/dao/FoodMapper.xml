@@ -8,6 +8,8 @@
     <result column="foodPrice" jdbcType="DECIMAL" property="foodprice" />
     <result column="bid" jdbcType="INTEGER" property="bid" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <association property="fCart" javaType="com.neusoft.po.Cart"
+                 select="com.neusoft.dao.CartMapper.selectCountByFoodId" column="foodId" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.neusoft.po.Food">
     <result column="foodImg" jdbcType="LONGVARCHAR" property="foodimg" />
@@ -284,4 +286,11 @@
       remarks = #{remarks,jdbcType=VARCHAR}
     where foodId = #{foodid,jdbcType=INTEGER}
   </update>
+
+<!--  **********************************************-->
+
+  <select id="selectBYbid" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select * from food
+    where bid = #{bid,jdbcType=INTEGER}
+  </select>
 </mapper>

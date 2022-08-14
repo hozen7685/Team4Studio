@@ -9,6 +9,11 @@
     <result column="oTT" jdbcType="DECIMAL" property="ott" />
     <result column="daId" jdbcType="INTEGER" property="daid" />
     <result column="oState" jdbcType="INTEGER" property="ostate" />
+    <association property="oDeliAdd" javaType="com.neusoft.po.DeliAdd"
+                 select="com.neusoft.dao.DeliAddMapper.selectBydaId" column="daId" />
+    <collection property="oCart" javaType="java.util.List" ofType="com.neusoft.po.Cart"
+                select="com.neusoft.dao.CartMapper.selectCartsBYbid" column="bid" />
+
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -240,4 +245,12 @@
       oState = #{ostate,jdbcType=INTEGER}
     where oid = #{oid,jdbcType=INTEGER}
   </update>
+
+<!--  根据uid查询所有订单-->
+  <select id="selectByUid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from orders
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+
 </mapper>
