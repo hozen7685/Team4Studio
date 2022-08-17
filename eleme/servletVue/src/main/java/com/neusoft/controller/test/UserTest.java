@@ -12,7 +12,7 @@ public class UserTest {
     @Test
     public void test1(){
     EleUserService EUS = new EleUserServiceImpl();
-    boolean b = EUS.regUser(new EleUser("e114519","99876d","sy",0,"17654327890","../",null,null,null));
+    boolean b = EUS.regUser(new EleUser("99876d","sy","17654327890"));
     if(b)
         System.out.println("注册成功");
     else
@@ -22,7 +22,7 @@ public class UserTest {
     @Test
     public void testQueryDAdd(){
         EleUserService EUS = new EleUserServiceImpl();
-        EleUser res = EUS.queryDAddBYuid("e114514");
+        EleUser res = EUS.queryDAddBYuid(114514);
         System.out.println(res.toString());
     }
 
@@ -32,5 +32,14 @@ public class UserTest {
         List<EleUser> res = EUS.selectAllUserInfo();
         for(EleUser item:res)
             System.out.println(item);
+    }
+
+    @Test
+    public void testcheck(){
+        EleUserService EUS = new EleUserServiceImpl();
+        boolean b = EUS.checkuName("chz");
+        boolean c = EUS.checkuPhone("17621349522");
+        System.out.println(b);
+        System.out.println(c);
     }
 }

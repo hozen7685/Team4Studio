@@ -10,7 +10,7 @@ public class Cart {
 
     private Integer bid;
 
-    private String uid;
+    private Integer uid;
 
     private Integer quantity;
 
@@ -41,11 +41,11 @@ public class Cart {
         this.bid = bid;
     }
 
-    public String getUid() {
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 
@@ -76,7 +76,7 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(Integer foodid, Integer bid, String uid, Integer quantity, Business cBusiness, Food cFood) {
+    public Cart(Integer foodid, Integer bid, Integer uid, Integer quantity, Business cBusiness, Food cFood) {
         this.foodid = foodid;
         this.bid = bid;
         this.uid = uid;

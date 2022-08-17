@@ -29,6 +29,8 @@ public interface OrdersMapper {
     int updateByPrimaryKey(Orders row);
 
     //根据uid查询所有订单
-    List<Orders> selectByUid(String uid);
+    List<Orders> selectByUid(Integer uid);
+
+    Orders selectOneByExample(OrdersExample example);
 
 }

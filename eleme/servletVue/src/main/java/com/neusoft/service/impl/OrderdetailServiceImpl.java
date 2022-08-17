@@ -7,9 +7,10 @@ import com.neusoft.utils.service.UTS;
 
 public class OrderdetailServiceImpl implements OrderdetailService {
 
-    OrderdetailMapper orderdetailetMapper = UTS.getSession().getMapper(OrderdetailMapper.class);
+    OrderdetailMapper orderdetailMapper = UTS.getSession().getMapper(OrderdetailMapper.class);
+
     @Override
-    public Orderdetail selectOrderdetailetByOdid(Integer odid) {
-        return orderdetailetMapper.selectByPrimaryKey(odid);
+    public int insertSelective(Orderdetail row) {
+        return orderdetailMapper.insertSelective(row);
     }
 }

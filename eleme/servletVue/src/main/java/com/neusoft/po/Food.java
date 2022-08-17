@@ -87,16 +87,6 @@ public class Food {
     public Food() {
     }
 
-    public Food(String foodname, String foodexplain, BigDecimal foodprice, Integer bid, String remarks, String foodimg, Cart fCart) {
-        this.foodname = foodname;
-        this.foodexplain = foodexplain;
-        this.foodprice = foodprice;
-        this.bid = bid;
-        this.remarks = remarks;
-        this.foodimg = foodimg;
-        this.fCart = fCart;
-    }
-
     @Override
     public String toString() {
         return "Food{" +

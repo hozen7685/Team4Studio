@@ -1,5 +1,6 @@
 package com.neusoft.utils;
 
+import org.junit.Test;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
@@ -14,8 +15,9 @@ import java.util.List;
 /**
  * MyBatis的逆向工程执行文件
  * */
-//public class MyBatisGeneratorRun {
-//    public static void main(String[] args) throws Exception {
+public class MyBatisGeneratorRun {
+//    @Test
+//    public void gen() throws Exception {
 //        List<String> warnings = new ArrayList<String>();
 //        boolean overwrite = true;
 //        File configFile = new File("src/main/resources/mybatisGen.xml");
@@ -25,4 +27,4 @@ import java.util.List;
 //        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
 //        myBatisGenerator.generate(null);
 //    }
-//}
+}

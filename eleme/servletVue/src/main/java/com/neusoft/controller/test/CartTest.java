@@ -12,7 +12,7 @@ public class CartTest {
     @Test
     public void carttest(){
         CartService CS = new CartServiceImpl();
-        List<Cart> res = CS.selectCartsBYuid("e114514");
+        List<Cart> res = CS.selectCartsBYuid(114514);
         for (Cart item:res)
             System.out.println(item.toString());
     }
@@ -28,7 +28,7 @@ public class CartTest {
     @Test
     public void carttest2(){
         CartService CS = new CartServiceImpl();
-        List<Cart> res = CS.selectCartsBYuidAndbid("e114514",2022);
+        List<Cart> res = CS.selectCartsBYuidAndbid(114514,7899);
         for (Cart item:res)
             System.out.println(item.toString());
     }

@@ -7,7 +7,7 @@
     <result column="conSex" jdbcType="INTEGER" property="consex" />
     <result column="conTel" jdbcType="VARCHAR" property="contel" />
     <result column="add" jdbcType="VARCHAR" property="add" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -104,7 +104,7 @@
     insert into deliAdd (daId, conName, conSex, 
       conTel, add, uid)
     values (#{daid,jdbcType=INTEGER}, #{conname,jdbcType=VARCHAR}, #{consex,jdbcType=INTEGER}, 
-      #{contel,jdbcType=VARCHAR}, #{add,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR})
+      #{contel,jdbcType=VARCHAR}, #{add,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.neusoft.po.DeliAdd">
     insert into deliAdd
@@ -145,7 +145,7 @@
         #{add,jdbcType=VARCHAR},
       </if>
       <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
+        #{uid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -174,7 +174,7 @@
         add = #{row.add,jdbcType=VARCHAR},
       </if>
       <if test="row.uid != null">
-        uid = #{row.uid,jdbcType=VARCHAR},
+        uid = #{row.uid,jdbcType=INTEGER},
       </if>
     </set>
     <if test="example != null">
@@ -188,7 +188,7 @@
       conSex = #{row.consex,jdbcType=INTEGER},
       conTel = #{row.contel,jdbcType=VARCHAR},
       add = #{row.add,jdbcType=VARCHAR},
-      uid = #{row.uid,jdbcType=VARCHAR}
+      uid = #{row.uid,jdbcType=INTEGER}
     <if test="example != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -209,7 +209,7 @@
         add = #{add,jdbcType=VARCHAR},
       </if>
       <if test="uid != null">
-        uid = #{uid,jdbcType=VARCHAR},
+        uid = #{uid,jdbcType=INTEGER},
       </if>
     </set>
     where daId = #{daid,jdbcType=INTEGER}
@@ -220,7 +220,7 @@
       conSex = #{consex,jdbcType=INTEGER},
       conTel = #{contel,jdbcType=VARCHAR},
       add = #{add,jdbcType=VARCHAR},
-      uid = #{uid,jdbcType=VARCHAR}
+      uid = #{uid,jdbcType=INTEGER}
     where daId = #{daid,jdbcType=INTEGER}
   </update>
 
@@ -228,7 +228,7 @@
   <select id="selectByuid" parameterType="java.lang.String" resultMap="BaseResultMap">
     select daId,conName,conSex,conTel,`add`
     from deliAdd
-    where uid = #{uid,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
   </select>
 
 <!--  根据daId查找地址-->

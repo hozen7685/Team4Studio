@@ -13,25 +13,13 @@ import java.util.List;
 public class BusinessTest {
 
     @Test
-    public void selectAllTest(){
-        BusinessService BS = new BusinessServiceImpl();
-        List<Business> res = BS.selectAllBusinesses();
-        for(Business item:res)
-            System.out.println(item.toString());
-    }
-
-    @Test
     public void foodTest(){
+        Food food = new Food();
+        food.setBid(7899);
+
         FoodService FS = new FoodServiceImpl();
-        List<Food> res = FS.selectFoodsBYbid(2022);
+        List<Food> res = FS.selectFoodsByBid(food);
         for(Food item:res)
             System.out.println(item.toString());
-    }
-
-    @Test
-    public void businesswithfoodTest(){
-        BusinessService BS = new BusinessServiceImpl();
-        Business res = BS.selectBusinessBYbid(2022);
-        System.out.println(res.toString());
     }
 }

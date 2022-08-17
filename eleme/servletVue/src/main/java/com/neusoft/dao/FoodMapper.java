@@ -35,5 +35,5 @@ public interface FoodMapper {
     int updateByPrimaryKey(Food row);
 
     //*********************************8
-    List<Food> selectBYbid(Integer bid);
+//    List<Food> selectBYbidAnduid(Integer bid, Integer uid);
 }

@@ -4,8 +4,9 @@
   <resultMap id="BaseResultMap" type="com.neusoft.po.Orderdetail">
     <id column="odId" jdbcType="INTEGER" property="odid" />
     <result column="oid" jdbcType="INTEGER" property="oid" />
-    <association property="order" javaType="com.neusoft.po.Orders"
-                 select="com.neusoft.dao.OrdersMapper.selectByPrimaryKey" column="oid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.neusoft.po.Orderdetail">
+    <result column="odetail" jdbcType="LONGVARCHAR" property="odetail" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,6 +69,25 @@
   <sql id="Base_Column_List">
     odId, oid
   </sql>
+  <sql id="Blob_Column_List">
+    odetail
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.neusoft.po.OrderdetailExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from orderdetail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.neusoft.po.OrderdetailExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -82,9 +102,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from orderdetail
     where odId = #{odid,jdbcType=INTEGER}
   </select>
@@ -99,8 +121,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.neusoft.po.Orderdetail">
-    insert into orderdetail (odId, oid)
-    values (#{odid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER})
+    insert into orderdetail (odId, oid, odetail
+      )
+    values (#{odid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, #{odetail,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.neusoft.po.Orderdetail">
     insert into orderdetail
@@ -111,6 +135,9 @@
       <if test="oid != null">
         oid,
       </if>
+      <if test="odetail != null">
+        odetail,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="odid != null">
@@ -118,6 +145,9 @@
       </if>
       <if test="oid != null">
         #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="odetail != null">
+        #{odetail,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -136,7 +166,19 @@
       <if test="row.oid != null">
         oid = #{row.oid,jdbcType=INTEGER},
       </if>
+      <if test="row.odetail != null">
+        odetail = #{row.odetail,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update orderdetail
+    set odId = #{row.odid,jdbcType=INTEGER},
+      oid = #{row.oid,jdbcType=INTEGER},
+      odetail = #{row.odetail,jdbcType=LONGVARCHAR}
     <if test="example != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -155,7 +197,16 @@
       <if test="oid != null">
         oid = #{oid,jdbcType=INTEGER},
       </if>
+      <if test="odetail != null">
+        odetail = #{odetail,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where odId = #{odid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.neusoft.po.Orderdetail">
+    update orderdetail
+    set oid = #{oid,jdbcType=INTEGER},
+      odetail = #{odetail,jdbcType=LONGVARCHAR}
     where odId = #{odid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.neusoft.po.Orderdetail">

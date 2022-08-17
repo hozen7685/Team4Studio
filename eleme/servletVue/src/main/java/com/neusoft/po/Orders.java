@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Orders {
     private Integer oid;
 
-    private String uid;
+    private Integer uid;
 
     private Integer bid;
 
@@ -31,11 +31,11 @@ public class Orders {
         this.oid = oid;
     }
 
-    public String getUid() {
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 
@@ -95,14 +95,13 @@ public class Orders {
         this.oCart = oCart;
     }
 
-    public Orders(String uid, Integer bid, String odate, BigDecimal ott, Integer daid, Integer ostate, DeliAdd oDeliAdd) {
+    public Orders(Integer uid, Integer bid, String odate, BigDecimal ott, Integer daid, Integer ostate) {
         this.uid = uid;
         this.bid = bid;
         this.odate = odate;
         this.ott = ott;
         this.daid = daid;
         this.ostate = ostate;
-        this.oDeliAdd = oDeliAdd;
     }
 
     public Orders() {

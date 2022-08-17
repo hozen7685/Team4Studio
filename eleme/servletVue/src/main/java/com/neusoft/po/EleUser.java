@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class EleUser {
-    private String uid;
+    private Integer uid;
 
     private String psw;
 
@@ -25,11 +25,11 @@ public class EleUser {
 
     private List<Orders> uOrders;
 
-    public String getUid() {
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 
@@ -108,7 +108,7 @@ public class EleUser {
     public EleUser() {
     }
 
-    public EleUser(String uid, String psw, String username, Integer sex, String uphone, String userimg, List<DeliAdd> deliAdds, Cart uCart, List<Orders> uOrders) {
+    public EleUser(Integer uid, String psw, String username, Integer sex, String uphone, String userimg, List<DeliAdd> deliAdds, Cart uCart, List<Orders> uOrders) {
         this.uid = uid;
         this.psw = psw;
         this.username = username;
@@ -121,7 +121,8 @@ public class EleUser {
     }
 
     //注册新用户使用
-    public EleUser(String psw, String uphone) {
+    public EleUser(String username, String psw, String uphone) {
+        this.username = username;
         this.psw = psw;
         this.uphone = uphone;
     }

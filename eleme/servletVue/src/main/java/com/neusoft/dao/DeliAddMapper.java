@@ -29,5 +29,5 @@ public interface DeliAddMapper {
     int updateByPrimaryKey(DeliAdd row);
 
 //    根据uid查找所有用户地址
-    List<DeliAdd> selectByuid(String uid);
+    List<DeliAdd> selectByuid(Integer uid);
 }

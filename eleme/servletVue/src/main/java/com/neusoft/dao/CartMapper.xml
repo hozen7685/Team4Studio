@@ -5,7 +5,7 @@
     <id column="cartId" jdbcType="INTEGER" property="cartid" />
     <result column="foodId" jdbcType="INTEGER" property="foodid" />
     <result column="bid" jdbcType="INTEGER" property="bid" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -103,7 +103,7 @@
     insert into cart (cartId, foodId, bid, 
       uid, quantity)
     values (#{cartid,jdbcType=INTEGER}, #{foodid,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, 
-      #{uid,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER})
+      #{uid,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.neusoft.po.Cart">
     insert into cart
@@ -135,7 +135,7 @@
         #{bid,jdbcType=INTEGER},
       </if>
       <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
+        #{uid,jdbcType=INTEGER},
       </if>
       <if test="quantity != null">
         #{quantity,jdbcType=INTEGER},
@@ -161,7 +161,7 @@
         bid = #{row.bid,jdbcType=INTEGER},
       </if>
       <if test="row.uid != null">
-        uid = #{row.uid,jdbcType=VARCHAR},
+        uid = #{row.uid,jdbcType=INTEGER},
       </if>
       <if test="row.quantity != null">
         quantity = #{row.quantity,jdbcType=INTEGER},
@@ -176,7 +176,7 @@
     set cartId = #{row.cartid,jdbcType=INTEGER},
       foodId = #{row.foodid,jdbcType=INTEGER},
       bid = #{row.bid,jdbcType=INTEGER},
-      uid = #{row.uid,jdbcType=VARCHAR},
+      uid = #{row.uid,jdbcType=INTEGER},
       quantity = #{row.quantity,jdbcType=INTEGER}
     <if test="example != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -192,7 +192,7 @@
         bid = #{bid,jdbcType=INTEGER},
       </if>
       <if test="uid != null">
-        uid = #{uid,jdbcType=VARCHAR},
+        uid = #{uid,jdbcType=INTEGER},
       </if>
       <if test="quantity != null">
         quantity = #{quantity,jdbcType=INTEGER},
@@ -204,7 +204,7 @@
 <!--    update cart-->
 <!--    set foodId = #{foodid,jdbcType=INTEGER},-->
 <!--      bid = #{bid,jdbcType=INTEGER},-->
-<!--      uid = #{uid,jdbcType=VARCHAR},-->
+<!--      uid = #{uid,jdbcType=INTEGER},-->
 <!--      quantity = #{quantity,jdbcType=INTEGER}-->
 <!--    where cartId = #{cartid,jdbcType=INTEGER}-->
 <!--  </update>-->
@@ -214,18 +214,20 @@
     <id column="cartId" jdbcType="INTEGER" property="cartid" />
     <result column="foodId" jdbcType="INTEGER" property="foodid" />
     <result column="bid" jdbcType="INTEGER" property="bid" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
     <association property="cBusiness" javaType="com.neusoft.po.Business"
                  select="com.neusoft.dao.BusinessMapper.selectByPrimaryKeyForCart" column="bid" />
+<!--    <collection property="cFood" javaType="java.util.List" ofType="com.neusoft.po.Food"-->
+<!--                 select="com.neusoft.dao.FoodMapper.selectByPrimaryKey" column="foodId" />-->
     <association property="cFood" javaType="com.neusoft.po.Food"
                  select="com.neusoft.dao.FoodMapper.selectByPrimaryKey" column="foodId" />
   </resultMap>
 
-  <select id="selectCartsBYuid" parameterType="java.lang.String" resultMap="BaseResultMapWithBusinessAndFood">
+  <select id="selectCartsBYuid" parameterType="java.lang.Integer" resultMap="BaseResultMapWithBusinessAndFood">
     select *
     from cart
-    where uid = #{uid,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
   </select>
 
   <select id="selectCartsBYbid" parameterType="java.lang.Integer" resultMap="BaseResultMapWithBusinessAndFood">
@@ -242,10 +244,10 @@
     where cartId = #{cartid,jdbcType=INTEGER}
   </update>
 
-  <select id="selectCountByFoodId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectCountByFoodIdAnduid" resultMap="BaseResultMap">
     select quantity
     from cart
-    where foodId = #{foodid,jdbcType=INTEGER}
+    where foodId = #{arg0} and uid = #{arg1}
   </select>
 
   <select id="selectCartsBYbidAnduid" resultMap="BaseResultMapWithBusinessAndFood">

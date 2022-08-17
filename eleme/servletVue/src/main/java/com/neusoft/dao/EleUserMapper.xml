@@ -2,12 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neusoft.dao.EleUserMapper">
   <resultMap id="BaseResultMap" type="com.neusoft.po.EleUser">
-    <id column="uid" jdbcType="VARCHAR" property="uid" />
+    <id column="uid" jdbcType="INTEGER" property="uid" />
     <result column="psw" jdbcType="VARCHAR" property="psw" />
     <result column="userName" jdbcType="VARCHAR" property="username" />
     <result column="sex" jdbcType="INTEGER" property="sex" />
     <result column="uPhone" jdbcType="VARCHAR" property="uphone" />
     <result column="uptime" jdbcType="TIMESTAMP" property="uptime" />
+    <collection property="deliAdds" javaType="java.util.List" ofType="com.neusoft.po.DeliAdd"
+                select="com.neusoft.dao.DeliAddMapper.selectByuid" column="uid"/>
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.neusoft.po.EleUser">
     <result column="userImg" jdbcType="LONGVARCHAR" property="userimg" />
@@ -106,17 +108,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from eleUser
-    where uid = #{uid,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from eleUser
-    where uid = #{uid,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.neusoft.po.EleUserExample">
     delete from eleUser
@@ -128,7 +130,7 @@
     insert into eleUser (uid, psw, userName, 
       sex, uPhone, uptime, 
       userImg)
-    values (#{uid,jdbcType=VARCHAR}, #{psw,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+    values (#{uid,jdbcType=INTEGER}, #{psw,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{sex,jdbcType=INTEGER}, #{uphone,jdbcType=VARCHAR}, #{uptime,jdbcType=TIMESTAMP}, 
       #{userimg,jdbcType=LONGVARCHAR})
   </insert>
@@ -159,7 +161,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
+        #{uid,jdbcType=INTEGER},
       </if>
       <if test="psw != null">
         #{psw,jdbcType=VARCHAR},
@@ -191,7 +193,7 @@
     update eleUser
     <set>
       <if test="row.uid != null">
-        uid = #{row.uid,jdbcType=VARCHAR},
+        uid = #{row.uid,jdbcType=INTEGER},
       </if>
       <if test="row.psw != null">
         psw = #{row.psw,jdbcType=VARCHAR},
@@ -218,7 +220,7 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update eleUser
-    set uid = #{row.uid,jdbcType=VARCHAR},
+    set uid = #{row.uid,jdbcType=INTEGER},
       psw = #{row.psw,jdbcType=VARCHAR},
       userName = #{row.username,jdbcType=VARCHAR},
       sex = #{row.sex,jdbcType=INTEGER},
@@ -231,7 +233,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update eleUser
-    set uid = #{row.uid,jdbcType=VARCHAR},
+    set uid = #{row.uid,jdbcType=INTEGER},
       psw = #{row.psw,jdbcType=VARCHAR},
       userName = #{row.username,jdbcType=VARCHAR},
       sex = #{row.sex,jdbcType=INTEGER},
@@ -263,7 +265,7 @@
         userImg = #{userimg,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where uid = #{uid,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.neusoft.po.EleUser">
     update eleUser
@@ -273,7 +275,7 @@
       uPhone = #{uphone,jdbcType=VARCHAR},
       uptime = #{uptime,jdbcType=TIMESTAMP},
       userImg = #{userimg,jdbcType=LONGVARCHAR}
-    where uid = #{uid,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.neusoft.po.EleUser">
     update eleUser
@@ -282,35 +284,7 @@
       sex = #{sex,jdbcType=INTEGER},
       uPhone = #{uphone,jdbcType=VARCHAR},
       uptime = #{uptime,jdbcType=TIMESTAMP}
-    where uid = #{uid,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
   </update>
-
-  <!--*********************************************************************-->
-  <resultMap id="UserWithDeliResultMap" type="com.neusoft.po.EleUser">
-    <id column="uid" jdbcType="VARCHAR" property="uid" />
-    <result column="uPhone" jdbcType="VARCHAR" property="uphone" />
-    <collection property="deliAdds" javaType="java.util.List" ofType="com.neusoft.po.DeliAdd"
-                select="com.neusoft.dao.DeliAddMapper.selectByuid" column="uid"/>
-  </resultMap>
-
-  <select id="selectAllUser" resultType="com.neusoft.po.EleUser" resultMap="ResultMapWithBLOBs">
-    SELECT * from eleuser
-  </select>
-
-  <select id="selectWithDeliAddByuid" resultType="com.neusoft.po.EleUser" resultMap="UserWithDeliResultMap">
-    SELECT * from eleuser where uid = #{uid,jdbcType=VARCHAR}
-  </select>
-
-
-
-
-
-
-
-
-
-
-
-
 </mapper>
 

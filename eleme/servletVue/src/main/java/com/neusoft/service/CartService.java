@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface CartService {
 
-    List<Cart> selectCartsBYuid(String uid);
+    List<Cart> selectCartsBYuid(Integer uid);
 
     int updateCartByCartId(Cart cart);
 
-    List<Cart> selectCartsBYuidAndbid(String uid,Integer bid);
+    List<Cart> selectCartsBYuidAndbid(Integer uid,Integer bid);
+
+    int deleteByExample(Integer uid,Integer bid);
 }

@@ -1,11 +1,11 @@
 package com.neusoft.po;
 
-import java.util.Objects;
-
 public class Orderdetail {
     private Integer odid;
 
     private Integer oid;
+
+    private String odetail;
 
     public Integer getOdid() {
         return odid;
@@ -23,38 +23,11 @@ public class Orderdetail {
         this.oid = oid;
     }
 
-    private Orders order;
-
-    public Orderdetail() {
+    public String getOdetail() {
+        return odetail;
     }
 
-    public Orders getOrder() {
-        return order;
-    }
-
-    public void setOrder(Orders order) {
-        this.order = order;
-    }
-
-    @Override
-    public String toString() {
-        return "Orderdetail{" +
-                "odid=" + odid +
-                ", oid=" + oid +
-                ", order=" + order +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Orderdetail)) return false;
-        Orderdetail that = (Orderdetail) o;
-        return Objects.equals(odid, that.odid);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(odid);
+    public void setOdetail(String odetail) {
+        this.odetail = odetail;
     }
 }

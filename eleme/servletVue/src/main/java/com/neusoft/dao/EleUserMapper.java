@@ -10,7 +10,7 @@ public interface EleUserMapper {
 
     int deleteByExample(EleUserExample example);
 
-    int deleteByPrimaryKey(String uid);
+    int deleteByPrimaryKey(Integer uid);
 
     int insert(EleUser row);
 
@@ -20,7 +20,7 @@ public interface EleUserMapper {
 
     List<EleUser> selectByExample(EleUserExample example);
 
-    EleUser selectByPrimaryKey(String uid);
+    EleUser selectByPrimaryKey(Integer uid);
 
     int updateByExampleSelective(@Param("row") EleUser row, @Param("example") EleUserExample example);
 
@@ -33,8 +33,4 @@ public interface EleUserMapper {
     int updateByPrimaryKeyWithBLOBs(EleUser row);
 
     int updateByPrimaryKey(EleUser row);
-    //--------------------------自定义---------------------------------------------
-    List<EleUser> selectAllUser();
-
-    EleUser selectWithDeliAddByuid(String uid);
 }
