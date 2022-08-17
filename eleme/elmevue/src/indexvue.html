@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Title</title>
+</head>
+<body>
+<div id="myapp">
+    <h5>{{ tips }}</h5>
+    <form method="post">
+        <input type="text" v-model="username" />
+        <input type="text" v-model="userpass" />
+        <input type="text" v-model="userphone" />
+        <input v-on:click="reg" type="button" value="注册" />
+    </form>
+
+<hr />
+    <ul>
+        <li v-for="(eluser,index) in userLists">
+            {{ index }}
+            {{ eluser.uid }}  --
+            <input type="text" name="username" v-bind:value="eluser.uname" />   --
+            <input type="text" name="userphone" v-bind:value="eluser.uphone" />   --
+            <button v-on:click.stop="deleteUser(index,eluser.uid)">删除</button> --
+            <button v-on:click.stop="updateUser($event,index,eluser.uid)">修改</button>
+        </li>
+    </ul>
+
+
+</div>
+
+
+<script src="jquery-3.6.0.js"></script>
+<script src="axios.js"></script>
+
+<script src="vue.js"></script>
+<script src="vueres.js"></script>
+    <script>
+
+
+        var vue = new Vue({
+            el: "#myapp",
+            data:{
+                username:"anonymous",
+                userpass:"123",
+                userphone:"110110",
+                tips:"",
+                userLists:[]
+            },
+            //页面加载时就获取所有用户信息并渲染到页面上
+            mounted:function(){
+                console.log("mounted working........");
+                var that = this;
+                //获取所有用户信息
+                axios.get(`http://localhost:8080/servletVue/confirmOrderView`).then(function (res){
+                    console.log(res);
+                    that.tips = res.data.message; //特别注意，此处this代表axios
+                    that.userLists = res.data.dataZone.eleusers;  //不建议  ，数组直接对数组赋值
+                }).catch(function (res){
+                    console.log("失败了");
+                })
+                ;
+            },
+            methods : {
+                updateUser:function(eve,index,uid){
+                    var that = this;
+
+                    //获取表单数据
+                    var username = eve.target.parentNode.querySelector("[name='username']").value;
+                    var userphone = eve.target.parentNode.querySelector("[name='userphone']").value;
+                    // console.log(username);
+
+                    //修改JavaScript本地变量
+                    // this.userLists[index].uname = username;
+                    // this.tips = this.userLists.splice(index,1)[0].uname + "删除成功";
+                    //删除服务器数据库内容
+                    let mydata = new URLSearchParams();
+                    mydata.append('uid', uid);
+                    mydata.append('username', username);
+                    mydata.append('userphone', userphone);
+                    axios.post(`http://localhost:8080/day20220809_war_exploded/servlet/updateEleuserServlet`,mydata,mydata).then(function (res){
+                        console.log(res);
+                        that.tips = res.data.message; //特别注意，此处this代表axios
+                    }).catch(function (res){
+                        console.log("失败了");
+                    })
+                    ;
+                },
+                deleteUser:function(index,uid){
+                    var that = this;
+                    //删除JavaScript本地变量
+                    this.tips = this.userLists.splice(index,1)[0].uname + "删除成功";
+                    //删除服务器数据库内容
+                    let mydata = new URLSearchParams();
+                    mydata.append('uid', uid);
+                    axios.post(`http://localhost:8080/day20220809_war_exploded/servlet/deleteEleuserServlet`,mydata,mydata).then(function (res){
+                        console.log(res);
+                        that.tips = res.data.message; //特别注意，此处this代表axios
+                    }).catch(function (res){
+                        console.log("失败了");
+                    })
+                    ;
+                },
+                reg : function(){
+                    var that = this;
+                    //axios实现
+                    let mydata = new URLSearchParams();
+                    mydata.append('username', this.username);
+                    mydata.append('userpass', this.userpass);
+                    mydata.append('userphone', this.userphone);
+
+
+                    axios.post(`http://localhost:8080/day20220809_war_exploded/servlet/addEleuserServlet`, mydata).then(function (res){
+                        that.userLists.push({"uid":999999,"uname":that.username,"uphone":that.userphone});
+                        that.tips = res.data.message;
+                    }).catch(function (res){
+                        console.log("失败了");
+                    })
+                    ;
+
+
+                    // //vue-resource  实现
+                    // var mydata = {
+                    //     username:this.username,
+                    //     userpass:this.userpass,
+                    //     userphone:this.userphone
+                    // };
+                    //
+                    //
+                    // this.$http.post('http://localhost:8080/day20220809_war_exploded/EleuserServlet',mydata, {params:mydata})
+                    //     .then(function (res) {
+                    //     console.log(res);
+                    // });
+                }
+            }
+        });
+
+
+    </script>
+</body>
+</html>

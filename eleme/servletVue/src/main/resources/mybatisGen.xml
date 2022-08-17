@@ -23,13 +23,13 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--        指定数据表的生成策略-->
-        <table tableName="business" domainObjectName="Business" />
-        <table tableName="cart" domainObjectName="Cart" />
-        <table tableName="deliAdd" domainObjectName="DeliAdd" />
-        <table tableName="food" domainObjectName="Food" />
-        <table tableName="orderdetailet" domainObjectName="Orderdetailet" />
-        <table tableName="orders" domainObjectName="Orders" />
-        <table tableName="eleUser" domainObjectName="EleUser" />
+<!--        <table tableName="business" domainObjectName="Business" />-->
+<!--        <table tableName="cart" domainObjectName="Cart" />-->
+<!--        <table tableName="deliAdd" domainObjectName="DeliAdd" />-->
+<!--        <table tableName="food" domainObjectName="Food" />-->
+        <table tableName="orderdetail" domainObjectName="Orderdetail" />
+<!--        <table tableName="orders" domainObjectName="Orders" />-->
+<!--        <table tableName="eleUser" domainObjectName="EleUser" />-->
 
 
 

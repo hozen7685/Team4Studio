@@ -1,0 +1,37 @@
+.wrapper{
+	margin-bottom: 14.2vw;
+}
+.user-info li{
+	display: flex;
+	align-items: center;
+	height: 10vw;
+	margin-top: 1vw;
+	border-bottom: #eee solid 0.3vw;
+}
+.user-info input{
+	border: none;
+	outline: none;
+}
+.user-info li:last-of-type{
+	border-bottom: none;
+}
+.user-info li:last-of-type input{
+	margin-left: 3vw;
+}
+.user-info p{
+	width: 20vw;
+	margin-left: 5vw;
+	font-size: 4vw;
+	color: #999;
+	font-weight: 600;
+}
+.register{
+	background-color: #38ca73;
+	width: 90vw;height: 10vw;
+	margin: 0 auto;
+	line-height: 10vw;
+	text-align: center;
+	color: #fff;
+	border-radius: 0.8vw;
+	margin-top: 10vw;
+}
